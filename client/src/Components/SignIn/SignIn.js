@@ -4,7 +4,7 @@ import firebase from 'firebase'
 import firebaseConfig from '../../firebaseConfig'
 import { useHistory, useLocation } from 'react-router-dom';
 import { UserContext } from '../../App';
-import google from '../../images/google.png'
+import google from '../../img/google.png'
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);

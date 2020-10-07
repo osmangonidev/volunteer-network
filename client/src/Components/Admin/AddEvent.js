@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import {useHistory} from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
-import './AddEvent.css'
-import upload from '../../images/upload.png'
+import upload from '../../img/upload.png'
 const AddEvent = () => {
 
     const [addEvent, setaddEvent]=useState({date:new Date().toDateString(),img:'https://imgur.com/XDR2o8k.png'})
@@ -22,9 +21,8 @@ const AddEvent = () => {
         })
     }
     return (
-        <>
-        <Grid  item xs={12} md={9} className='mt-3' >
-            <h3 className="border-none">Add Event</h3>
+        <Grid  item xs={12} md={9} className='mt-3 ml-2 ' >
+            <h3 className="border-none ml-5">Add Event</h3>
             <Grid  container item xs={12} className='p-5 mt-5 shadow rounded'>
                 <Grid item xs={12} sm={6}>
                     <div>
@@ -42,25 +40,21 @@ const AddEvent = () => {
                 <Grid item xs={12} sm={6} >
                     <div>
                         <b>Event date</b><br/>
-                        <input type='date' className='event-input border border-secondary my-3 px-3 h-25 rounded' id='date'
-                        onBlur={(event)=>setaddEvent({...addEvent,date:new Date(event.target.value).toDateString()})}
-                            />
+                        <input type='date' className='event-input border border-secondary my-3 px-3 h-25 rounded' 
+                        id='date' onBlur={(event)=>setaddEvent({...addEvent,date:new Date(event.target.value).toDateString()})} />
                     </div>
                     <div>
                         <p className='font-weight-bold mb-0 mt-1' >Add Image</p><br/>
                         <input placeholder='Give a image link' type='text' className='event-input' id='date' 
-                        onBlur={(event)=>setaddEvent({...addEvent,img:event.target.value})}
-                           />
+                        onBlur={(event)=>setaddEvent({...addEvent,img:event.target.value})} />
                     </div>
                     <div>
-                        <p className='font-weight-bold mb-0 mt-1'>Banner</p><br/>
-                            <div className='img-upload' 
-                                style={{background:`url(${upload}) no-repeat`, backgroundSize:'30px 30px'}}>
-                                <input type="file"/>
-                                <p className="font-weight-bold text-primary m-0">Upload image</p>
+                            <p className='font-weight-bold mb-0 mt-1 '>Banner</p><br/>
+                            <div className='img-upload d-flex position-relative justify-content-center align-items-center border border-ifo rounded pl-3 '
+                                style={{background:`url(${upload}) no-repeat`, backgroundSize:'28px 28px',width:'150px',height:'31px'}}>
+                                <input style={{height:30,width:140,position:'absolute',top:0,left:0,opacity:0}} type="file"/>
+                                <p className="font-weight-bold text-primary  ml-3 mt-2">Upload image</p>
                             </div>
-                    
-                       
                     </div>
                 </Grid>
             </Grid>
@@ -70,8 +64,6 @@ const AddEvent = () => {
                     <p className="font-weight-bold">Add Event</p>
             </button>
         </Grid>
-        
-        </>
     );
 };
 

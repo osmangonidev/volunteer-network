@@ -82,8 +82,7 @@ const Admin = () => {
                 <Grid container item xs={12}  style={{padding:'10px',  paddingTop:'20px'}}>
                 <Grid container item xs={12} alignItems='center'>
                 <Grid item >
-                <button className='nav-button border-0 mb-3 rounded p-1 py-2 pr-2 bg-white shadow' autoFocus>
-                <div onClick={()=>setUser({...user,clicked:'volunteerList'})} className='d-flex my-15 text-center'>
+                <div onClick={()=>setUser({...user,clicked:'volunteerList'})} className='d-flex my-15 text-center rounded shadow py-3 mb-3 px-2'>
                     <div>
                         <PeopleOutlineIcon></PeopleOutlineIcon>
                     </div>
@@ -91,20 +90,13 @@ const Admin = () => {
                         <b>Volunteer register list</b>
                     </div>
                 </div>
-                </button>
                 </Grid>
 
                 <Grid item >
-                <button className='nav-button border-0 rounded shadow p-3 mb-5 bg-white'>
-                <div onClick={()=>setUser({...user,clicked:'addEvent'})} className='d-flex my-15 text-center'>
-                    <div>
-                        <AddIcon></AddIcon>
-                    </div>
-                    <div classNamme='ml-1'>
-                        <b>Add Event</b>
-                    </div>
+                <div onClick={()=>setUser({...user,clicked:'addEvent'})} className='d-flex my-15 text-center  rounded shadow p-3 mb-5 bg-white'>
+                    <div><AddIcon></AddIcon></div>
+                    <div classNamme='ml-1'><b>Add Event</b></div>
                 </div>
-                </button>
                 </Grid>
                 </Grid>
 

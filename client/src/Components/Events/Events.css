@@ -1,19 +1,19 @@
+.event-cancel:active{
+  background:rgb(221, 71, 71);
+  color:white
+}
 .event-cancel{
-  background:#E3E3E3;
-  color:rgb(112, 108, 108);
-  outline:none;
+  background:#e6d0d0;
+  color:rgb(122, 110, 110);
   border:none;
+  border-radius:5px;
   height:30px;
   cursor:pointer;
-  border-radius:5px;
-  padding:0 20px
+  padding:0 20px;
+  outline:none;
 }
 .event-cancel:hover{
-    background:rgb(214, 118, 118);
-    color:white
+  color:rgb(238, 229, 229);
+  background:rgb(201, 85, 85);
 }
 
-.event-cancel:active{
-    background:rgb(226, 86, 86);
-    color:white
-}

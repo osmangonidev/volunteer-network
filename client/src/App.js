@@ -16,32 +16,28 @@ function App() {
     <UserContext.Provider value={[user,setUser]}>
       <Router>
       <div><Header></Header> </div>
+
       <Switch>
         <Route exact path='/'>
           <Home></Home>
         </Route>
-
+        <PrivateRoute exact path='/registation-event'>
+          <RegistationEvent></RegistationEvent>
+        </PrivateRoute>
+        <PrivateRoute exact path='/events'>
+          <Events></Events>
+        </PrivateRoute>
         <Route exact path='/signIn'>
           <SignIn></SignIn>
         </Route>
-
-        <Route exact path='/registation-event'>
-          <RegistationEvent></RegistationEvent>
-        </Route>
-
-        <Route exact path='/events'>
-          <Events></Events>
-        </Route>
-
-        <Route exact path='/admin'>
+        <PrivateRoute exact path='/admin'>
           <Admin></Admin>
-        </Route>
-
+        </PrivateRoute>
         <Route path='*'>
             <h1>Page is not found: 404</h1>
         </Route>
-
       </Switch>
+      
       </Router>
     </UserContext.Provider>
   );
