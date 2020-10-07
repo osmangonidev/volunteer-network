@@ -13,39 +13,29 @@ const Header = () => {
                 
                 <Grid item  xs={12}  md={6}>
                     <Link className='link' to='/'>
-                        <img style={{height:'60px'}} src={logo} alt="volunteer network logo"/>
+                        <img style={{height:'64px'}} src={logo} alt="volunteer network logo"/>
                     </Link>
                 </Grid>
                 
                 <Grid container item xs={12} md={6} justify='space-between' alignItems='center' spacing={1} style={{paddingRight:'10px'}}>
-                    <Grid item xs={12} md={2}><Link to='/' className='link'><b>Home</b></Link></Grid>
-                    <Grid item xs={12} md={2}><Link to='/donation' className='link'><b>Donation</b></Link></Grid>
-                    <Grid item xs={12} md={2}><Link to='/events' className='link'><b>Events</b></Link></Grid>
-                    <Grid item xs={12} md={2}><Link to='/blog' className='link'><b>Blog</b></Link></Grid>
-                    
-                    
-                    
-                    
+                    <Grid item xs={12} md={2}><Link to='/' className='link text-decoration-none'><b>Home</b></Link></Grid>
+                    <Grid item xs={12} md={2}><Link to='/donation' className='link text-decoration-none'><b>Donation</b></Link></Grid>
+                    <Grid item xs={12} md={2}><Link to='/events' className='link text-decoration-none'><b>Events</b></Link></Grid>
+                    <Grid item xs={12} md={2}><Link to='/blog' className='link text-decoration-none'><b>Blog</b></Link></Grid>
                     {
-                        user.isSignedIn ? <Grid item xs={12} md={2}><b style={{color:'#3F90FC'}}>{user.name || 'User'} </b></Grid>
+                        user.isSignedIn ? <Grid item xs={12} md={2}><p className='text-info pt-2 font-weight-bold'>{user.name || 'User'} </p></Grid>
                         
                         : <Grid item xs={12} md={2} >
-                            <Link to='/auth' className='link'>
-                            <Button  variant="contained" style={{background:'#3F90FC', color:'white'}}>
-                                Register
-                            </Button>
+                            <Link to='/signIn' className='link text-decoration-none'>
+                            <Button  variant="contained" className='bg-info text-white'> Register</Button>
                             </Link>
                         </Grid>
-                        
                     }
                     <Grid item xs={12} md={2}>
-                    <Link to='/admin-panel' className='link'>
-                        <Button variant="contained" style={{background:'#434141', color:'white'}}>
-                            Admin
-                        </Button>
+                    <Link to='/admin' className='link text-decoration-none'>
+                        <Button variant="contained" className='bg-dark text-white'>Admin</Button>
                     </Link>
                     </Grid>
-                    
                 </Grid>
             </Grid>
         </div>

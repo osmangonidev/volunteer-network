@@ -2,13 +2,12 @@ import React, { createContext, useState } from 'react';
 import './App.css';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import Home from './Components/Home/Home';
-import NotFound from './Components/NotFound/NotFound';
-import Login from './Components/Login/Login'
-import Auth from './Components/Auth/Auth'
-import RegistationForm from './Components/RegistationForm/RegistationForm';
+import SignIn from './Components/SignIn/SignIn'
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
 import Events from './Components/Events/Events';
-import AdminPanel from './Components/AdminPanel/AdminPanel';
+import Admin from './Components/Admin/Admin';
+import Header from './Components/Header/Header';
+import RegistationEvent from './Components/RegistationEvent/RegistationEvent';
 export const UserContext = createContext()
 function App() {
   const [user,setUser]=useState({isSignedUp:true})
@@ -16,30 +15,30 @@ function App() {
   return (
     <UserContext.Provider value={[user,setUser]}>
       <Router>
-
+      <div><Header></Header> </div>
       <Switch>
         <Route exact path='/'>
           <Home></Home>
         </Route>
 
-        <Route exact path='/auth'>
-          <Auth></Auth>
+        <Route exact path='/signIn'>
+          <SignIn></SignIn>
         </Route>
 
-        <PrivateRoute exact path='/registation-form'>
-          <RegistationForm></RegistationForm>
-        </PrivateRoute>
+        <Route exact path='/registation-event'>
+          <RegistationEvent></RegistationEvent>
+        </Route>
 
-        <PrivateRoute exact path='/events'>
+        <Route exact path='/events'>
           <Events></Events>
-        </PrivateRoute>
+        </Route>
 
-        <PrivateRoute exact path='/admin-panel'>
-          <AdminPanel></AdminPanel>
-        </PrivateRoute>
+        <Route exact path='/admin'>
+          <Admin></Admin>
+        </Route>
 
         <Route path='*'>
-          <NotFound></NotFound>
+            <h1>Page is not found: 404</h1>
         </Route>
 
       </Switch>

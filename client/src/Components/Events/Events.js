@@ -1,7 +1,6 @@
 import { Grid } from '@material-ui/core';
 import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../App';
-import Header from '../Header/Header';
 import './Events.css'
 const Events = () => {
     const [user]=useContext(UserContext)
@@ -25,8 +24,8 @@ const Events = () => {
             method:'DELETE',
             headers:{
                 'Content-Type':'application/json',
-                id:id
-            }
+            },
+            body:JSON.stringify({id:id})
         })
         .then(res=>res.json())
         .then(result=>{
@@ -36,26 +35,23 @@ const Events = () => {
             }
         })
     }
+
     return (
-        <>
-        <Header></Header>
-  
-            <Grid container item xs={11} justify='center'  spacing='5' style={{margin:'auto'}}>
+        <div>
+            <Grid container item xs={11} justify='center'  spacing='5' className='mx-auto'>
                 {
                     events.map(event=>{
                        return(
                             <Grid key={event._id} container item xs={10} sm={5} justify='space-around' 
-                            style={{boxShadow:'0px 2px 5px lightGray', borderRadius:'10px', width:'100%',margin:'10px'}}>
-                                <Grid item xs={10} md={5} style={{width:'50%'}}>
-                                    <img style={{width:'100%', height:'180px'}} src={event.img} alt=""/>
+                            className="shadow p-3 m-5 bg-white rounded">
+                                <Grid item xs={10} md={5} className='w-50'>
+                                    <img className='w-100 h-75' src={event.img} alt=""/>
                                 </Grid>
-                                <Grid item xs={10} md={5} style={{width:'50%', marginLeft:'15px'}}>
+                                <Grid item xs={10} md={5} >
                                     <h3>{event.eventName}</h3>
                                     <h4>{event.date}</h4>
-                                    <div style={{textAlign:'right', marginTop:'30px'}}>
-                                    <button onClick={()=>calcelEventHandler(event._id)}  className='event-cancel'>
-                                        cancel
-                                    </button>
+                                    <div >
+                                    <button onClick={()=>calcelEventHandler(event._id)}  className='event-cancel'>cancel</button>
                                     </div>
                                 </Grid>
                             </Grid>
@@ -65,7 +61,7 @@ const Events = () => {
             </Grid>
             
        
-        </>
+        </div>
     );
 };
 

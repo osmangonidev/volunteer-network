@@ -1,4 +1,4 @@
-.event-input{
+/* .event-input{
     border:1px solid lightgray;
     outline:none;
     border-radius:5px;
@@ -6,16 +6,16 @@
     height:30px;
     padding:0 15px;
     margin:12px 0;
-}
-.event-textarea{
+} */
+/* .event-textarea{
     border:1px solid lightgray;
     outline:none;
     border-radius:5px;
     margin:12px 0;
     padding:5px 15px;
     width:80%;
-}
-
+} */
+/* 
 input[type='file']{
     height:30px;
     width:140px;
@@ -27,7 +27,7 @@ input[type='file']{
 
   }
 
-.file-upload{
+.img-upload{
     height:30px;
     width:140px;
     position:relative;
@@ -42,4 +42,4 @@ input[type='file']{
     color: #FFFFFF;
     font-size:13px; 
     
-}
+} */

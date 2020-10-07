@@ -1,9 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import Header from '../Header/Header';
-import background from '../../images/backgroud.jpg'
+import React, { useEffect, useState, useContext } from 'react';
 import { Grid } from '@material-ui/core';
-import EventCard from '../EventCard/EventCard'
+import './Home.css'
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Typography from '@material-ui/core/Typography';
+import { useHistory } from 'react-router-dom';
+import { UserContext } from '../../App';
 const Home = () => {
+
+    const colors=['#3F82FC','#FFBD3F','#FF7004', '#cc6fb5f0'];
+    const [user,setUser]=useContext(UserContext)
+    const history=useHistory()
 
     const [allTasks, setAllTasks]=useState([])
     useEffect(()=>{
@@ -13,36 +22,45 @@ const Home = () => {
             
             setAllTasks(result)
         })
+        .catch(err=>alert(err))
     },[])
 
+    const taskClickHandler = (task) =>{
+      setUser({...user,event:task})
+      history.replace('/registation-event')
+    }
+
     return (
-        <>
-            <div style={{background:`linear-gradient(to bottom,
-                 rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)),
-                 url(${background}) `, height:'496px'}}>
-
-                <Header></Header>
-                <div style={{textAlign:'center', padding:'30px 0'}}>
-                    <h2 style={{margin:'20px'}}>I GROW BY HELPING PEOPLE IN NEED</h2>
-                    
-                        
-                            <input style={{borderTopLeftRadius: '5px',borderBottomLeftRadius: '5px'}}
-                                className='input' type="text" placeholder="Search"/>
-                            <button style={{borderTopRightRadius: '5px',borderBottomRightRadius: '5px'}} 
-                                className='blue-button' type="submit">Search</button>
-                        
-                    
+        <div>
+            <div id='home-wrapper'>
+                <div className='text-center my-5'>
+                    <h2 className='m-5'>I GROW BY HELPING PEOPLE IN NEED</h2>
+                        <input className='input' type="text" placeholder="Search"/>
+                        <button className='blue-button' type="submit">Search</button>
                 </div>
-                <div className='container' style={{marginTop:'70px'}}>
-                    <Grid container item xs={12} spacing='5' justify='center'  style={{ textAlign:'center', margin:'auto'}}>
+                <div className='mx-5'>
+                    <Grid container item xs={12} spacing='7' justify='center'>
                     {   
-                        allTasks.map(task=>{
-                            let colors=['#3F90FC','#FFBD3E','#FF7044', '#cc6fb5e0'];
-                            const random = Math.floor(Math.random()*4)
+                        allTasks.map(task=>{ 
+                            const randomNumber = Math.floor(Math.random()*4);
                             return(
-
                                 <Grid item xs={12} sm={6} md={4} lg={3} key={task._id}>
-                                    <EventCard event={task} myColor={colors[random]} ></EventCard>
+                                    <Card className='rounded' style={{background:colors[randomNumber]}}>
+                                        <CardActionArea >
+                                            <CardMedia onClick={()=>taskClickHandler(task)}
+                                            component="img"
+                                            alt="Contemplative Reptile"
+                                            height='200'
+                                            image={task.img}
+                                            title="Contemplative Reptile"
+                                            />
+                                            <CardContent style={{color:'white'}}>
+                                            <Typography gutterBottom >
+                                                {task.name}
+                                            </Typography>
+                                            </CardContent>
+                                        </CardActionArea>
+                                    </Card>
                                 </Grid>
                             )
                         })
@@ -50,7 +68,7 @@ const Home = () => {
                     </Grid>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

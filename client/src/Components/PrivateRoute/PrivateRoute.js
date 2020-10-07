@@ -12,8 +12,8 @@ const PrivateRoute = ({children, ...rest}) => {
             render ={
                 ()=>user.isSignedIn ? (children)
                 : <Redirect to={{
-                    pathname:'/auth',
-                    state:location
+                    pathname:'/signIn',
+                    state:{from:location}
                 }}
                 />
             }

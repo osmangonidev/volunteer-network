@@ -8,9 +8,11 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { Grid } from '@material-ui/core';
-import LeftNav from './LeftNav';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
+import AddIcon from '@material-ui/icons/Add';
 import { UserContext } from '../../App';
+import { Link } from 'react-router-dom';
 import AddEvent from './AddEvent';
 
 const StyledTableCell = withStyles((theme) => ({
@@ -38,13 +40,12 @@ const StyledTableCell = withStyles((theme) => ({
     },
   });
 
-  //start dashboard componentent code
-const AdminPanel = () => {
-    const [user]=useContext(UserContext)
-    const classes=useStyles();
+
+const Admin = () => {
     const [allEvents, setAllEvents] = useState([])
-    
-    
+    const [user,setUser]=useContext(UserContext)
+    const classes=useStyles();
+
     useEffect(()=>{
         
             fetch('http://localhost:5000/all-registered-events')
@@ -53,13 +54,18 @@ const AdminPanel = () => {
        
     },[])
 
+    useEffect(()=>{
+        setUser({...user, clicked:'volunteerList'})
+    },[])
+    
+
     const eventDeleteHandler=(id)=>{
         fetch('http://localhost:5000/cancel-event',{
             method:'DELETE',
             headers:{
                 'Content-Type':'application/json',
-                id:id
-            }
+            },
+            body:JSON.stringify({id:id})
         })
         .then(res=>res.json())
         .then(result=>{
@@ -73,15 +79,43 @@ const AdminPanel = () => {
     return (
         <Grid container item xs={12}>
             <Grid item md={2} xs={12}>
-                <LeftNav></LeftNav>
+                <Grid container item xs={12}  style={{padding:'10px',  paddingTop:'20px'}}>
+                <Grid container item xs={12} alignItems='center'>
+                <Grid item >
+                <button className='nav-button border-0 mb-3 rounded p-1 py-2 pr-2 bg-white shadow' autoFocus>
+                <div onClick={()=>setUser({...user,clicked:'volunteerList'})} className='d-flex my-15 text-center'>
+                    <div>
+                        <PeopleOutlineIcon></PeopleOutlineIcon>
+                    </div>
+                    <div classNamme='ml-1 '>
+                        <b>Volunteer register list</b>
+                    </div>
+                </div>
+                </button>
+                </Grid>
+
+                <Grid item >
+                <button className='nav-button border-0 rounded shadow p-3 mb-5 bg-white'>
+                <div onClick={()=>setUser({...user,clicked:'addEvent'})} className='d-flex my-15 text-center'>
+                    <div>
+                        <AddIcon></AddIcon>
+                    </div>
+                    <div classNamme='ml-1'>
+                        <b>Add Event</b>
+                    </div>
+                </div>
+                </button>
+                </Grid>
+                </Grid>
+
+                </Grid>
             </Grid>
 
             {
                 user.clicked == 'volunteerList' &&
                 <Grid item md={9} xs={12} style={{marginLeft:'20px', marginTop:'10px'}}>
                 <h3 style={{textAlign:'left', marginLeft:'10px', color:'#0C0C0C'}}>Volunteer register list</h3>
-                <TableContainer component={Paper} style={{marginTop:'30px',
-                    boxShadow:'0 2px 5px lightgray', padding:'30px', borderRadius:'10px'}}>
+                <TableContainer component={Paper} className=' mt-5 p-5 rounded shadow text-center'>
                 <Table className={classes.table} aria-label="customized table" >
                     <TableHead>
                     <TableRow>
@@ -105,8 +139,7 @@ const AdminPanel = () => {
                         <StyledTableCell align="left">{event.eventName}</StyledTableCell>
                         <StyledTableCell align="left">
                             <DeleteForeverIcon onClick={()=>eventDeleteHandler(event._id)} 
-                            justify='center' style={{cursor:'pointer', color:'#f35d5d'}}>
-
+                            justify='center' className="text-danger">
                             </DeleteForeverIcon>
                         </StyledTableCell>
                         </StyledTableRow>
@@ -126,4 +159,4 @@ const AdminPanel = () => {
     );
 };
 
-export default AdminPanel;
+export default Admin;
