@@ -6,11 +6,11 @@ const Events = () => {
     const [user]=useContext(UserContext)
     const [events, setEvents]=useState([])
     useEffect(()=>{
-        fetch('http://localhost:5000/my-events',{
+        fetch(`http://localhost:5000/my-events?email=${user.email}`,{
             method:'GET', 
             headers:{
                 'Content-Type':'application/json',
-                email: user.email
+                authorization:`Bearer ${sessionStorage.getItem('token')}`
             }
         })
         .then(res=>res.json())

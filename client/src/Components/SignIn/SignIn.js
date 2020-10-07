@@ -22,15 +22,23 @@ export default function SignIn() {
     firebase.auth().signInWithPopup(provider)
     .then(result=>{
       const user=result.user;
-      setUser({...user, email:user.email, name:user.displayName, uid:user.uid, isSignedIn:true})
-      history.replace(from)
+      setUser({...user, email:user.email, name:user.displayName, uid:user.uid, isSignedIn:true});
+      storeAuthToken();
+      history.replace(from);
     })
     .catch(error=>alert(error.message))
   }
 
 
 // token verify
-
+  const storeAuthToken=()=>{
+    firebase.auth().currentUser.getIdToken(/* forceRefresh */ true)
+    .then(function(idToken) {
+      sessionStorage.setItem('token',idToken);
+    }).catch(function(error) {
+      
+    });
+  }
 
   return (
    <div>

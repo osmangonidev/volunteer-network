@@ -46,12 +46,16 @@ const Admin = () => {
     const [user,setUser]=useContext(UserContext)
     const classes=useStyles();
 
-    useEffect(()=>{
-        
-            fetch('http://localhost:5000/all-registered-events')
-            .then(res=>res.json())
-            .then(result=>setAllEvents(result))
-       
+    useEffect(()=>{ 
+        fetch(`http://localhost:5000/all-registered-events?email=${user.email}`,{
+            method:'GET', 
+            headers:{
+                'Content-Type':'application/json',
+                authorization:`Bearer ${sessionStorage.getItem('token')}`
+            }
+        })
+        .then(res=>res.json())
+        .then(result=>setAllEvents(result))
     },[])
 
     useEffect(()=>{
